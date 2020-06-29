@@ -1,14 +1,13 @@
 const canvas = document.getElementById('gameCanvas');
 const canvasContext = canvas.getContext('2d');
-let ballX = 200;
-let ballY = 200;
+let ballX = 250;
+let ballY = 250;
 let ballSpeedX = 10;
-let ballSpeedY = 10;
+let ballSpeedY = 4;
 let paddle1Y = 250;
 let paddle2Y = 250;
 const paddleThickness = 10;
 const paddleHeight = 100;
-
 let player1Score = 0;
 let player2Score = 0;
 
@@ -28,7 +27,7 @@ const colorCirc = (centerX, centerY, radius, drawColor) => {
 // function to reset the ball in the ventre of canvas
 
 const ballReset = () => {
-  ballSpeedX= -ballSpeedX;
+  ballSpeedX = - ballSpeedX;
   ballX = canvas.width/2;
   ballY = canvas.height/2;
 }
@@ -50,9 +49,9 @@ const calculateMousePos = evt => {
 const computerMovement = () => {
   const paddle2YCenter = paddle2Y + paddleHeight/2;
   if (paddle2YCenter < ballY -35) {
-    paddle2Y += 10;
+    paddle2Y += 6;
   } else if (paddle2YCenter > ballY +35) {
-    paddle2Y -= 10;
+    paddle2Y -= 6;
   }
 }
 // creates the rectangles needed for the game
@@ -78,7 +77,9 @@ const movement = () => {
   ballY += ballSpeedY;
   if (ballX < paddleThickness) {
     if (ballY > paddle1Y && ballY < paddle1Y + paddleHeight) {
-      ballSpeedX= -ballSpeedX;
+      ballSpeedX = -ballSpeedX;
+      let deltaY1 = ballY - (paddle1Y + paddleHeight/2)
+      ballSpeedY = deltaY1 * 0.35
     } else {
       ballReset();
       player2Score++;
@@ -87,6 +88,8 @@ const movement = () => {
   if (ballX > canvas.width - paddleThickness) {
     if (ballY > paddle2Y && ballY < paddle2Y + paddleHeight) {
       ballSpeedX= -ballSpeedX;
+      let deltaY2 = ballY - (paddle2Y + paddleHeight/2)
+      ballSpeedY = deltaY2 * 0.35
     } else {
       ballReset();
       player1Score++;
