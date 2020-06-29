@@ -49,9 +49,9 @@ const calculateMousePos = evt => {
 const computerMovement = () => {
   const paddle2YCenter = paddle2Y + paddleHeight/2;
   if (paddle2YCenter < ballY -35) {
-    paddle2Y += 6;
+    paddle2Y += 8;
   } else if (paddle2YCenter > ballY +35) {
-    paddle2Y -= 6;
+    paddle2Y -= 8;
   }
 }
 // creates the rectangles needed for the game
