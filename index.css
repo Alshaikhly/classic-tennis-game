@@ -1,0 +1,28 @@
+body {
+  background-image: url("ping-pong2.gif");
+  background-size: cover;
+  background-color: black;
+  /* display: flex;
+  flex-wrap: wrap; */
+}
+
+#button-menu {
+  display: flex;
+  flex-direction: column;
+}
+button {
+  height: 60px;
+  width: 150px;
+  background-color: indianred;
+  font-size: large;
+  margin-left: 2em;
+  margin-bottom: 0.5em;
+  border-radius: 10%;
+}
+.Not-start {
+  margin-top: 0.5em;
+}
+button:hover {
+  background-color: greenyellow;
+  cursor: pointer;
+}

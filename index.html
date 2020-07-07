@@ -3,10 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>First Arcade Game</title>
+  <title>ping pong Arcade</title>
+  <link rel="stylesheet" href="index.css" type="text/css" />
 </head>
-<body>
-  <canvas id="gameCanvas" width="800" height="600"></canvas>
+<body class="body">
+  <!-- <div style="width:100%;height:0;padding-bottom:68%;position:relative;"><iframe src="https://giphy.com/embed/kjReZ2vUmMBfG" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p><a href="https://giphy.com/gifs/kjReZ2vUmMBfG">via GIPHY</a></p> -->
+  <canvas id="gameCanvas" width="800" height="600">
+  </canvas>
+  <div id="button-menu">
+    <button id="start-game">Re/Start game</button>
+    <button class="Not-start" id="settings">Change settings</button>
+    <button class="difficulty" id="easy">Easy</button>
+    <button class="difficulty" id="medium">Medium</button>
+    <button class="difficulty" id="hard">Hard</button>
+  </div>
     <script
   src="https://code.jquery.com/jquery-3.5.1.js"
   integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="

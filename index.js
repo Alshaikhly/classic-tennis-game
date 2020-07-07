@@ -56,18 +56,27 @@ const calculateMousePos = evt => {
   };
 };
 
-const computerMovement = () => {
+const computerMovement = (level) => {
   const paddle2YCenter = paddle2Y + paddleHeight/2;
+
   if (paddle2YCenter < ballY -35) {
-    paddle2Y += 8;
+    if (level === 'hard') {
+      paddle2Y += 50;
+    } else {
+      paddle2Y += 7
+    }
   } else if (paddle2YCenter > ballY +35) {
-    paddle2Y -= 8;
+    if (level === 'hard') {
+      paddle2Y -= 50;
+    } else {
+      paddle2Y -= 7
+    }
   }
 }
 // creates the rectangles needed for the game
 const gameArea = () => {
   // drawing the canvas
-  colorRect(0, 0, canvas.width, canvas.height, 'black');
+  colorRect(0, 0, canvas.width, canvas.height, 'green');
 
   if (showingWinScreen) {
     canvasContext.fillStyle = 'white';
@@ -76,7 +85,6 @@ const gameArea = () => {
     } else if (player2Score >= winningScore) {
       canvasContext.fillText("🎾🎾🎾Computer won!!🎾🎾🎾", 300, 200);
     }
-    canvasContext.fillText("click anywhere to play again", 320, 450);
     return; // this is just to bail out of the function early
   }
 
@@ -127,27 +135,53 @@ const movement = () => {
     ballSpeedY = -ballSpeedY;
   }
 }
+let level = "easy";
+// const callAll = (level) => {
+//   gameArea();
+//   movement();
+//   computerMovement(level);
+// };
 
-const callBoth = () => {
-  gameArea();
-  movement();
-  computerMovement();
-};
-
-const handleMouseClick = evt => {
-  if (showingWinScreen) {
-    player1Score = 0;
-    player2Score = 0;
-    showingWinScreen = false
-  }
-}
+// const handleMouseClick = evt => {
+//   if (showingWinScreen) {
+//     player1Score = 0;
+//     player2Score = 0;
+//     showingWinScreen = false
+//   }
+// }
 $(document).ready(function() {
-  
+  $('#gameCanvas').hide()
+  $('#settings').hide()
   const framesPerSecond = 30;
-  setInterval(callBoth, 1000/framesPerSecond);
+  setInterval(function() {
+    gameArea();
+    movement();
+    computerMovement(level)
+    console.log(level)
+  }, 1000/framesPerSecond);
 
-  canvas.addEventListener('mousedown', handleMouseClick);
-  
+  // $('start-game').addEventListener('onclick', handleMouseClick);
+  $('#start-game').click(function() {
+    level = "hard";``
+    $('.difficulty').hide()
+    $('#settings').show()
+    $('.body').css('background-image', 'none')
+    if (showingWinScreen) {
+      player1Score = 0;
+      player2Score = 0;
+      showingWinScreen = false
+    } else if (!showingWinScreen) {
+      $('#gameCanvas').show()
+      player1Score = 0;
+      player2Score = 0;
+      ballReset();
+    }
+  })
+
+  $('#settings').click(function() {
+    location.reload()
+  })
+
   canvas.addEventListener('mousemove', 
     function(evt) {
       let mousePos = calculateMousePos(evt);
