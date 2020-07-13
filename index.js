@@ -10,7 +10,7 @@ const paddleThickness = 10;
 const paddleHeight = 100;
 let player1Score = 0;
 let player2Score = 0;
-const winningScore = 2;
+const winningScore = 3;
 let showingWinScreen = false;
 
 // colorRect is a function that takes the 5 parameters to draw a rect on canvas
@@ -61,13 +61,13 @@ const computerMovement = (level) => {
 
   if (paddle2YCenter < ballY -35) {
     if (level === 'hard') {
-      paddle2Y += 50;
+      paddle2Y += 30;
     } else {
       paddle2Y += 7
     }
   } else if (paddle2YCenter > ballY +35) {
     if (level === 'hard') {
-      paddle2Y -= 50;
+      paddle2Y -= 30;
     } else {
       paddle2Y -= 7
     }
@@ -158,11 +158,11 @@ $(document).ready(function() {
     movement();
     computerMovement(level)
     console.log(level)
-  }, 1000/framesPerSecond);
+  }, 30);
 
   // $('start-game').addEventListener('onclick', handleMouseClick);
   $('#start-game').click(function() {
-    level = "hard";``
+    level = "hard";
     $('.difficulty').hide()
     $('#settings').show()
     $('.body').css('background-image', 'none')
